@@ -24,6 +24,10 @@ polygon = PackedVector2Array(-14, -26, 14, -26, 14, 26, -14, 26)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
+[node name="RopeLine" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0.55, 0.35, 0.12, 1)
+
 [node name="AttackHitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4

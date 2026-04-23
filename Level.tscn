@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Enemy.tscn" id="2_enemy"]
+[ext_resource type="PackedScene" path="res://Branch.tscn" id="3_branch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(840, 40)
@@ -69,6 +70,12 @@ shape = SubResource("RectangleShape2D_wall")
 [node name="Sprite" type="Polygon2D" parent="Wall" unique_id=1802805403]
 color = Color(0.55, 0.48, 0.38, 1)
 polygon = PackedVector2Array(-10, -140, 10, -140, 10, 140, -10, 140)
+
+[node name="Branch1" parent="." unique_id=1234567890 instance=ExtResource("3_branch")]
+position = Vector2(275, 185)
+
+[node name="Branch2" parent="." unique_id=1098765432 instance=ExtResource("3_branch")]
+position = Vector2(490, 105)
 
 [node name="Player" parent="." unique_id=721907146 instance=ExtResource("1_player")]
 position = Vector2(80, 340)

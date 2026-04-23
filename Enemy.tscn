@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Enemy.gd" id="1_enemy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(40, 50)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_enemy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Sprite" type="Polygon2D" parent="."]
+color = Color(1, 0.3, 0.2, 1)
+polygon = PackedVector2Array(-20, -25, 20, -25, 20, 25, -20, 25)
+
+; EdgeLeft/Right raycasts detect cliff edges so the enemy turns around.
+; They start at the enemy's sides, just below centre, and cast 40 px downward.
+[node name="EdgeLeft" type="RayCast2D" parent="."]
+position = Vector2(-22, 10)
+target_position = Vector2(0, 40)
+collision_mask = 1
+enabled = true
+
+[node name="EdgeRight" type="RayCast2D" parent="."]
+position = Vector2(22, 10)
+target_position = Vector2(0, 40)
+collision_mask = 1
+enabled = true

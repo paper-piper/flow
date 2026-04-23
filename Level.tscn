@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://c3ud4kj8geg5q"]
+
+[ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://Enemy.tscn" id="2_enemy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(840, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1"]
+size = Vector2(160, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2"]
+size = Vector2(180, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3"]
+size = Vector2(140, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(20, 280)
+
+[node name="Level" type="Node2D" unique_id=1112613306]
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=325044706]
+position = Vector2(400, 420)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=1878564245]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="Sprite" type="Polygon2D" parent="Ground" unique_id=278776923]
+color = Color(0.38, 0.28, 0.18, 1)
+polygon = PackedVector2Array(-420, -20, 420, -20, 420, 20, -420, 20)
+
+[node name="Platform1" type="StaticBody2D" parent="." unique_id=375211540]
+position = Vector2(160, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=900828657]
+shape = SubResource("RectangleShape2D_p1")
+
+[node name="Sprite" type="Polygon2D" parent="Platform1" unique_id=1954655184]
+color = Color(0.5, 0.5, 0.5, 1)
+polygon = PackedVector2Array(-80, -10, 80, -10, 80, 10, -80, 10)
+
+[node name="Platform2" type="StaticBody2D" parent="." unique_id=963418150]
+position = Vector2(390, 215)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=295082469]
+shape = SubResource("RectangleShape2D_p2")
+
+[node name="Sprite" type="Polygon2D" parent="Platform2" unique_id=979512693]
+color = Color(0.5, 0.5, 0.5, 1)
+polygon = PackedVector2Array(-90, -10, 90, -10, 90, 10, -90, 10)
+
+[node name="Platform3" type="StaticBody2D" parent="." unique_id=1936753513]
+position = Vector2(590, 140)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1386286165]
+shape = SubResource("RectangleShape2D_p3")
+
+[node name="Sprite" type="Polygon2D" parent="Platform3" unique_id=2126763651]
+color = Color(0.5, 0.5, 0.5, 1)
+polygon = PackedVector2Array(-70, -10, 70, -10, 70, 10, -70, 10)
+
+[node name="Wall" type="StaticBody2D" parent="." unique_id=338973756]
+position = Vector2(710, 285)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=1545319758]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Sprite" type="Polygon2D" parent="Wall" unique_id=1802805403]
+color = Color(0.55, 0.48, 0.38, 1)
+polygon = PackedVector2Array(-10, -140, 10, -140, 10, 140, -10, 140)
+
+[node name="Player" parent="." unique_id=721907146 instance=ExtResource("1_player")]
+position = Vector2(80, 340)
+
+[node name="Enemy1" parent="." unique_id=1259691793 instance=ExtResource("2_enemy")]
+position = Vector2(160, 250)
+
+[node name="Enemy2" parent="." unique_id=1941979741 instance=ExtResource("2_enemy")]
+position = Vector2(390, 170)

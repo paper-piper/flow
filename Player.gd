@@ -36,6 +36,9 @@ var _dash_dir_x    := 1.0
 var _grappling      := false
 var _grapple_branch : Node2D = null
 
+# ── Facing direction (+1 right, -1 left) ──────────────────────────────────────
+var _facing := 1.0
+
 # ── Attack ────────────────────────────────────────────────────────────────────
 const ATTACK_DURATION := 0.20
 var _attack_timer := 0.0
@@ -48,7 +51,7 @@ var _hitstop := 0
 var _shake_time := 0.0
 var _shake_str  := 0.0
 
-@onready var _sprite : Polygon2D = $Sprite
+@onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _hitbox : Area2D    = $AttackHitbox
 @onready var _cam    : Camera2D  = $Camera2D
 @onready var _rope   : Line2D    = $RopeLine
@@ -57,12 +60,14 @@ func _ready() -> void:
 	add_to_group("player")
 	_hitbox.monitoring = false
 	_hitbox.body_entered.connect(_on_hit_body)
+	_sprite.play("idle")
 	_rope.add_point(Vector2.ZERO)
 	_rope.add_point(Vector2.ZERO)
 	_rope.visible = false
 
 func _physics_process(delta: float) -> void:
 	_tick_shake(delta)
+	_update_anim()
 
 	if _hitstop > 0:
 		_hitstop -= 1
@@ -107,7 +112,8 @@ func _physics_process(delta: float) -> void:
 		var dir := Input.get_axis("ui_left", "ui_right")
 		if dir != 0.0:
 			velocity.x = move_toward(velocity.x, dir * SPEED * 0.5, ACCEL * 0.4 * delta)
-			_sprite.scale.x = dir
+			_sprite.flip_h = dir < 0.0
+			_facing = dir
 
 		# Jump while grappling: release and leap with upward boost
 		if Input.is_action_just_pressed("ui_accept"):
@@ -153,7 +159,8 @@ func _physics_process(delta: float) -> void:
 	var dir := Input.get_axis("ui_left", "ui_right")
 	if dir != 0.0:
 		velocity.x = move_toward(velocity.x, dir * SPEED, ACCEL * delta)
-		_sprite.scale.x = dir
+		_sprite.flip_h = dir < 0.0
+		_facing = dir
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
 
@@ -177,7 +184,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			_dashing       = true
 			_dash_timer    = DASH_DURATION
-			_dash_dir_x    = _sprite.scale.x
+			_dash_dir_x    = _facing
 			_dash_cooldown = DASH_COOLDOWN
 
 	# ── Attack ────────────────────────────────────────────────────────────────
@@ -206,7 +213,7 @@ func _try_grapple() -> void:
 			closest_dist = d
 	_grappling = true
 	_grapple_branch = closest
-	velocity *= 0.3   # brief pause as hook catches
+	velocity *= 2   # brief pause as hook catches
 	_rope.set_point_position(1, to_local(closest.global_position))
 	_rope.visible = true
 
@@ -214,7 +221,7 @@ func _release_grapple(jump: bool) -> void:
 	_grappling = false
 	_grapple_branch = null
 	_rope.visible = false
-	velocity *= 1.3   # carry swing momentum as a boost
+	velocity *= 3.3   # carry swing momentum as a boost
 	if jump:
 		velocity.y = -300.0   # leap off the rope
 
@@ -222,7 +229,7 @@ func _begin_attack() -> void:
 	_attacking    = true
 	_attack_timer = ATTACK_DURATION
 	_hitbox.monitoring = true
-	_hitbox.position.x = 42.0 * _sprite.scale.x
+	_hitbox.position.x = 42.0 * _facing
 
 func _end_attack() -> void:
 	_attacking = false
@@ -231,11 +238,22 @@ func _end_attack() -> void:
 func _on_hit_body(body: Node2D) -> void:
 	if not body.has_method("take_hit"):
 		return
-	var knock_dir := Vector2(_sprite.scale.x, -0.3).normalized()
+	var knock_dir := Vector2(_facing, -0.3).normalized()
 	body.take_hit(1, knock_dir * 380.0)
 	_hitstop    = 4
 	_shake_str  = 7.0
 	_shake_time = 0.16
+
+func _update_anim() -> void:
+	if not is_on_floor():
+		return   # keep last ground animation while airborne / falling
+	var spd := absf(velocity.x)
+	if spd < 10.0:
+		_sprite.play("idle")
+	elif spd < SPEED * 0.65:
+		_sprite.play("walk")
+	else:
+		_sprite.play("sprint")
 
 func _tick_shake(delta: float) -> void:
 	if _shake_time > 0.0:

@@ -1,0 +1,17 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1777033496
+Branch.gd::GDScript::259994700225433098::1777030138::0::1::::<>Node2D<><>0<>0<><>::
+Branch.tscn::PackedScene::-1::1777030138::0::1::::<><><>0<>0<><>::res://Branch.gd
+ducky_3_spritesheet.png::CompressedTexture2D::8085821389519029630::1777033031::1777033031::1::::<><><>0<>0<>16fba9b5e38aed4470ae9ba0640e32ff<>res://.godot/imported/ducky_3_spritesheet.png-2c03975c9868030c842f828d3798d844.ctex::
+Enemy.gd::GDScript::8617986166044296848::1776945076::0::1::::<>CharacterBody2D<><>0<>0<><>::
+Enemy.tscn::PackedScene::-1::1776945090::0::1::::<><><>0<>0<><>::res://Enemy.gd
+Level.tscn::PackedScene::6779651023978139140::1777033231::0::1::::<><><>0<>0<><>::res://Player.tscn<>res://Enemy.tscn<>res://Branch.tscn<>uid://dng3kdivbl8k5::::res://ducky_3_spritesheet.png<>uid://b6uulkigqntox::::res://TX Tileset Ground.png
+Player.gd::GDScript::6732814522899986562::1777031170::0::1::::<>CharacterBody2D<><>0<>0<><>::
+Player.tscn::PackedScene::-1::1777030138::0::1::::<><><>0<>0<><>::res://Player.gd
+TX Tileset Ground.png::CompressedTexture2D::4604796913028047719::1777031761::1777031762::1::::<><><>0<>0<>e14356355b8b3f2286238df95b0d2192<>res://.godot/imported/TX Tileset Ground.png-d6ef34d8256ca36c2efcd6002a1f28a4.ctex::
+::res://Texture/::1777033496
+TX Chest Animation.png::CompressedTexture2D::5924061279000492191::1777033496::1777033496::1::::<><><>0<>0<>d771d97504f5b815d7b7815ca643aace<>res://.godot/imported/TX Chest Animation.png-e842fba40aff9e192c293c1575666d34.ctex::
+TX FX Flame.png::CompressedTexture2D::5235011002970746757::1777033496::1777033496::1::::<><><>0<>0<>bed07cb41737e10753719a841589c916<>res://.godot/imported/TX FX Flame.png-80d15c79101d825f142cfc9a8dd71151.ctex::
+TX FX Torch Flame.png::CompressedTexture2D::3035220254063004436::1777033496::1777033496::1::::<><><>0<>0<>683306a511d3a74cea95dc1a9c000d8c<>res://.godot/imported/TX FX Torch Flame.png-3f0823327d6ab4c4c9211962981da03b.ctex::
+TX Tileset Ground.png::CompressedTexture2D::11932404894322039::1777033496::1777033496::1::::<><><>0<>0<>46e2d6b3fc9761a0c264ad36c475fce7<>res://.godot/imported/TX Tileset Ground.png-09c49e674b4e05fa0e1740174a329964.ctex::
+TX Village Props.png::CompressedTexture2D::3178826477909169353::1777033496::1777033496::1::::<><><>0<>0<>964ab1061317b310d2dba21e06fa4388<>res://.godot/imported/TX Village Props.png-111f6fb80172e48598527cc8cc1180bf.ctex::

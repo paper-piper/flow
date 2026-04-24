@@ -1,24 +1,165 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://dng3kdivbl8k5" path="res://ducky_3_spritesheet.png" id="2_ducky"]
 
+; ── idle (row y=64, 4 frames) ─────────────────────────────────────────────────
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3clv"]
+atlas = ExtResource("2_ducky")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxnmf"]
+atlas = ExtResource("2_ducky")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4eo0i"]
+atlas = ExtResource("2_ducky")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86ljf"]
+atlas = ExtResource("2_ducky")
+region = Rect2(96, 64, 32, 32)
+
+; ── sprint (row y=96, 6 frames) ───────────────────────────────────────────────
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ywx5"]
+atlas = ExtResource("2_ducky")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofirr"]
+atlas = ExtResource("2_ducky")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6u53"]
+atlas = ExtResource("2_ducky")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sypgb"]
+atlas = ExtResource("2_ducky")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn5x0"]
+atlas = ExtResource("2_ducky")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esphl"]
+atlas = ExtResource("2_ducky")
+region = Rect2(160, 96, 32, 32)
+
+; ── walk (row y=32, 6 frames) ─────────────────────────────────────────────────
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qkpu"]
+atlas = ExtResource("2_ducky")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcckh"]
+atlas = ExtResource("2_ducky")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jftiw"]
+atlas = ExtResource("2_ducky")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yye10"]
+atlas = ExtResource("2_ducky")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pd0bf"]
+atlas = ExtResource("2_ducky")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_viiqw"]
+atlas = ExtResource("2_ducky")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_105nu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3clv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxnmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4eo0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86ljf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ywx5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofirr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6u53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sypgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn5x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esphl")
+}],
+"loop": true,
+"name": &"sprint",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qkpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcckh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jftiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yye10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pd0bf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_viiqw")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+; ── Collision shapes ──────────────────────────────────────────────────────────
+; Duck sprite displays at 64x64 (32px * scale 2). Collision fits inner body,
+; offset +2px down so the visual feet align with the physics floor contact.
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
-size = Vector2(28, 52)
+size = Vector2(22, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
 size = Vector2(36, 28)
 
+; ── Scene tree ────────────────────────────────────────────────────────────────
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 1
 script = ExtResource("1_player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_body")
 
-[node name="Sprite" type="Polygon2D" parent="."]
-color = Color(0.2, 0.55, 1, 1)
-polygon = PackedVector2Array(-14, -26, 14, -26, 14, 26, -14, 26)
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_105nu")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
